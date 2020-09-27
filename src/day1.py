@@ -41,7 +41,7 @@ x_train = preprocessing(dftrain_raw)
 y_train = dftrain_raw['Survived'].values
 
 x_test = preprocessing(dftest_raw)
-y_test = dftest_raw['Survived'].values
+# y_test = dftest_raw['Survived'].values
 
 # 定义模型
 model = models.Sequential()
@@ -56,7 +56,7 @@ model.compile(optimizer='adam',
 history = model.fit(x_train, y_train,
                     batch_size=64,
                     epochs=30,
-                    validation_split=0.2  # 分割一部分训练数据用于验证
+                    validation_split=0.2 # 分割一部分训练数据用于验证
                    )
 
 # 评估模型可视化
@@ -72,17 +72,18 @@ def plot_metric(history, metric):
     plt.legend(["train_"+metric, 'val_'+metric])
     plt.show()
 
+print(history.history)
 plot_metric(history, "loss")
-plot_metric(history, "AUC")
+plot_metric(history, "auc")
 
-# 测试集上的结果
-test_ret = model.evaluate(x=x_test, y=y_test)
-print(test_ret)
-
-# 测试集上预测结果
-#预测概率
-y_pro = model.predict(x_test[0:10])
-print(y_pro)
-#预测类别
-y_label = model.predict_classes(x_test[0:10])
-print(y_label)
+# # 测试集上的结果
+# test_ret = model.evaluate(x=x_test, y=y_test)
+# print(test_ret)
+#
+# # 测试集上预测结果
+# #预测概率
+# y_pro = model.predict(x_test[0:10])
+# print(y_pro)
+# #预测类别
+# y_label = model.predict_classes(x_test[0:10])
+# print(y_label)
