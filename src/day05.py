@@ -23,11 +23,11 @@ class WideDeepModel(keras.models.Model):
         self.hidden2_layer = keras.layers.Dense(16, activation='relu')
         self.output_layer = keras.layers.Dense(1)
 
-    def call(self, input):
+    def call(self, inputs, training=None, mask=None):
         """完成模型的正向计算"""
-        hidden1 = self.hidden1_layer(input)
+        hidden1 = self.hidden1_layer(inputs)
         hidden2 = self.hidden2_layer(hidden1)
-        concat = keras.layers.concatenate([input, hidden2])
+        concat = keras.layers.concatenate([inputs, hidden2])
         output = self.output_layer(concat)
         return output
 
