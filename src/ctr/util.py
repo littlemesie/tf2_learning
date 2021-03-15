@@ -6,10 +6,15 @@ import tensorflow as tf
 def get_dataset(file_path):
 
     df = pd.read_csv(file_path, sep=',')
-    str_column = ['userGenre1', 'userGenre2', 'userGenre3', 'userGenre4', 'userGenre5', 'movieGenre1', 'movieGenre2', 'movieGenre3']
+    str_column = ['userGenre1', 'userGenre2', 'userGenre3', 'userGenre4', 'userGenre5', 'movieGenre1', 'movieGenre2',
+                  'movieGenre3']
     for c in str_column:
-
         df[c].fillna('', inplace=True)
+    num_column = ['userRatedMovie1', 'userRatedMovie2', 'userRatedMovie3', 'userRatedMovie4',
+                  'userRatedMovie5']
+    for c in num_column:
+        df[c].fillna(0, inplace=True)
+
     data_feature = {}
     columns = df.columns.values
     labels = []

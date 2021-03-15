@@ -132,8 +132,10 @@ model.compile(
     optimizer='adam',
     metrics=['accuracy', tf.keras.metrics.AUC(curve='ROC'), tf.keras.metrics.AUC(curve='PR')])
 
+# model.summary()
+# print(train_x)
 # train the model
-model.fit(x=train_x, y=train_y, batch_size=16, epochs=5)
+model.fit(x=train_x, y=train_y, batch_size=64, epochs=5)
 
 # evaluate the model
 test_loss, test_accuracy, test_roc_auc, test_pr_auc = model.evaluate(x=test_x, y=test_y, batch_size=16)
